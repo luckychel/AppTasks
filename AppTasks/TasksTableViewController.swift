@@ -70,7 +70,7 @@ class TasksTableViewController: UITableViewController {
                 self.tasks[index] = t
                 if (self.task != nil)
                 {
-                    self.task!.addTask(t)
+                    self.task?.addTask(t)
                     self.closure?()
                 }
                 self.tableView.reloadData()
@@ -116,6 +116,11 @@ class TasksTableViewController: UITableViewController {
         if editingStyle == .delete {
             tasks.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
+            if (self.task != nil)
+            {
+                self.task?.deleteTask(indexPath.row)
+                self.closure?()
+            }
             
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
