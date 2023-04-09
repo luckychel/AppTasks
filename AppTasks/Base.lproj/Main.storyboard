@@ -7,10 +7,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Задачи-->
+        <!--Tasks Table View Controller-->
         <scene sceneID="JWe-i3-9Oz">
             <objects>
-                <tableViewController id="Ldy-LZ-dLs" customClass="TasksTableViewController" customModule="AppTasks" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="TasksTableViewController" id="Ldy-LZ-dLs" customClass="TasksTableViewController" customModule="AppTasks" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="gma-l4-LT0">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -30,7 +30,7 @@
                             <outlet property="delegate" destination="Ldy-LZ-dLs" id="3YG-7o-Od2"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Задачи" id="GiA-1b-6bH">
+                    <navigationItem key="navigationItem" id="GiA-1b-6bH">
                         <barButtonItem key="rightBarButtonItem" title="Добавить задачу" image="text.badge.plus" catalog="system" id="tyZ-QI-WUZ">
                             <connections>
                                 <action selector="addNewTask:" destination="Ldy-LZ-dLs" id="66d-ds-0zm"/>
