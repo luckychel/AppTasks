@@ -29,7 +29,6 @@ class TaskTableViewCell: UITableViewCell {
     //MARK: Button action
     @IBAction func taskSave(_ sender: UIButton) {
         task.text = taskEdit.text ?? ""
-        task.taskEditable = false
         closure?(task, index)
     }
     
@@ -50,10 +49,10 @@ class TaskTableViewCell: UITableViewCell {
         self.taskLabel.text = task.text
         self.taskCount.text = String(task.taskCount())
         
-        self.setDisplay(task)
+        self.display(task)
     }
     
-    func setDisplay(_ task: Task){
+    func display(_ task: Task){
         if (task.taskEditable) {
             self.taskLabel.isHidden = true
             self.taskCount.isHidden = true
@@ -68,4 +67,6 @@ class TaskTableViewCell: UITableViewCell {
             self.taskBtnSave.isHidden = true
         }
     }
+    
+   
 }

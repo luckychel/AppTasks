@@ -8,16 +8,24 @@
 import UIKit
 
 class TasksTableViewController: UITableViewController {
- 
 
+    //MARK: Properties
+    var task: Task?
+    var index: Int?
+    
     var tasks: [Task] = []
     
+    var closure: (() -> ())?
+    
+    //MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tasks.append(Task("test 1", false))
-        tasks.append(Task("test 2", false))
-        tasks.append(Task("test 3", false))
+        self.navigationItem.title = task?.text ?? "Задачи"
+        
+        if (self.task != nil) {
+            self.tasks = task!.getTasks()
+        }
 
         self.tableView.register(UINib(nibName: "TaskTableViewCell", bundle: nil), forCellReuseIdentifier: "TaskCell")
     }
@@ -50,47 +58,70 @@ class TasksTableViewController: UITableViewController {
         cell.configure(tasks[indexPath.row], indexPath.row)
         
         cell.closure = {[weak self] t, index in
-            self?.tasks[index].taskEditable = t.taskEditable
-            self?.tableView.reloadData()
+            guard let self = self else {
+                return
+            }
+            if (t.text.isEmpty) {
+                self.showErrorAlert()
+            }
+            else
+            {
+                t.taskEditable = false
+                self.tasks[index] = t
+                if (self.task != nil)
+                {
+                    self.task!.addTask(t)
+                    self.closure?()
+                }
+                self.tableView.reloadData()
+            }
         }
         
         return cell
     }
 
-    /*
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let task = tasks[indexPath.row]
+        
+        if (!task.taskEditable) {
+            let vc: TasksTableViewController = UIStoryboard(name: "Main", bundle: nil)
+                .instantiateViewController(withIdentifier: "TasksTableViewController") as! TasksTableViewController
+            vc.task = tasks[indexPath.row]
+            vc.closure = {[weak self] in
+                guard let self = self else {
+                    return
+                }
+                self.tableView.reloadData()
+            }
+            self.navigationController?.pushViewController(vc, animated: true)
+
+        }
+    }
+    
+    
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+//        if (tasks[indexPath.row].taskEditable) {
+//            return false
+//        }
+//        else {
+            return true
+        //}
     }
-    */
-
-    /*
+    
+    
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Delete the row from the data source
+            tasks.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
+            
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
+    
 
     /*
     // MARK: - Navigation
@@ -101,5 +132,14 @@ class TasksTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    func showErrorAlert() {
+        let alertController = UIAlertController(title: "Ошибка", message: "Введите текст задачи", preferredStyle: .alert)
+        let action1 = UIAlertAction(title: "ОК", style: .default) { action in
+            self.dismiss(animated: true)
+        }
+        alertController.addAction(action1)
+        present(alertController, animated: true)
+    }
 
 }
