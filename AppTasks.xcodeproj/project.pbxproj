@@ -13,6 +13,9 @@
 		81125F5D29E2CA7000F83D0E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81125F5C29E2CA7000F83D0E /* Assets.xcassets */; };
 		81125F6029E2CA7000F83D0E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81125F5E29E2CA7000F83D0E /* LaunchScreen.storyboard */; };
 		81125F6A29E2CE6200F83D0E /* TasksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81125F6929E2CE6200F83D0E /* TasksTableViewController.swift */; };
+		81125F7329E2E8D000F83D0E /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81125F7129E2E8D000F83D0E /* TaskTableViewCell.swift */; };
+		81125F7429E2E8D000F83D0E /* TaskTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81125F7229E2E8D000F83D0E /* TaskTableViewCell.xib */; };
+		81125F7729E2EC3600F83D0E /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81125F7629E2EC3600F83D0E /* Task.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,9 @@
 		81125F5F29E2CA7000F83D0E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		81125F6129E2CA7000F83D0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		81125F6929E2CE6200F83D0E /* TasksTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksTableViewController.swift; sourceTree = "<group>"; };
+		81125F7129E2E8D000F83D0E /* TaskTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
+		81125F7229E2E8D000F83D0E /* TaskTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskTableViewCell.xib; sourceTree = "<group>"; };
+		81125F7629E2EC3600F83D0E /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,8 +64,9 @@
 			children = (
 				81125F5329E2CA6F00F83D0E /* AppDelegate.swift */,
 				81125F5529E2CA6F00F83D0E /* SceneDelegate.swift */,
-				81125F7029E2D29C00F83D0E /* TaskContoller */,
-				81125F6F29E2D28F00F83D0E /* TaskCell */,
+				81125F7029E2D29C00F83D0E /* Controller */,
+				81125F7529E2EC0300F83D0E /* Model */,
+				81125F6F29E2D28F00F83D0E /* Cell */,
 				81125F5929E2CA6F00F83D0E /* Main.storyboard */,
 				81125F5C29E2CA7000F83D0E /* Assets.xcassets */,
 				81125F5E29E2CA7000F83D0E /* LaunchScreen.storyboard */,
@@ -68,19 +75,29 @@
 			path = AppTasks;
 			sourceTree = "<group>";
 		};
-		81125F6F29E2D28F00F83D0E /* TaskCell */ = {
+		81125F6F29E2D28F00F83D0E /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				81125F7129E2E8D000F83D0E /* TaskTableViewCell.swift */,
+				81125F7229E2E8D000F83D0E /* TaskTableViewCell.xib */,
 			);
-			name = TaskCell;
+			name = Cell;
 			sourceTree = "<group>";
 		};
-		81125F7029E2D29C00F83D0E /* TaskContoller */ = {
+		81125F7029E2D29C00F83D0E /* Controller */ = {
 			isa = PBXGroup;
 			children = (
 				81125F6929E2CE6200F83D0E /* TasksTableViewController.swift */,
 			);
-			name = TaskContoller;
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		81125F7529E2EC0300F83D0E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				81125F7629E2EC3600F83D0E /* Task.swift */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -141,6 +158,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				81125F7429E2E8D000F83D0E /* TaskTableViewCell.xib in Resources */,
 				81125F6029E2CA7000F83D0E /* LaunchScreen.storyboard in Resources */,
 				81125F5D29E2CA7000F83D0E /* Assets.xcassets in Resources */,
 				81125F5B29E2CA6F00F83D0E /* Main.storyboard in Resources */,
@@ -154,7 +172,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				81125F7329E2E8D000F83D0E /* TaskTableViewCell.swift in Sources */,
 				81125F6A29E2CE6200F83D0E /* TasksTableViewController.swift in Sources */,
+				81125F7729E2EC3600F83D0E /* Task.swift in Sources */,
 				81125F5429E2CA6F00F83D0E /* AppDelegate.swift in Sources */,
 				81125F5629E2CA6F00F83D0E /* SceneDelegate.swift in Sources */,
 			);
