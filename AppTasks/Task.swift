@@ -28,9 +28,12 @@ class Task {
     func addTask(_ task: Task) {
         tasks.append(task)
     }
-   
+    func deleteTask(_ index: Int) {
+        self.tasks.remove(at: index)
+    }
     func getTasks() -> [Task] {
         return tasks
     }
 
+    
 }
