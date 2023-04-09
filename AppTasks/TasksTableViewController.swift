@@ -39,15 +39,14 @@ class TasksTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-//        guard let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath) as? TaskTableViewCell else {
-//            return UITableViewCell()
-//        }
-//        cell.taskEditable = true
-//        cell.taskLabel.text = "Тест"
-//        cell.taskCount.text = "Кол-во"
-//
-//        return cell
-        return UITableViewCell()
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath) as? TaskTableViewCell else {
+            return UITableViewCell()
+        }
+        cell.taskEditable = false
+        cell.taskLabel.text = "Тест"
+        cell.taskCount.text = "Кол-во"
+
+        return cell
     }
 
     /*
