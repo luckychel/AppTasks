@@ -8,32 +8,36 @@
 import UIKit
 
 class TasksTableViewController: UITableViewController {
+ 
 
+    var tasks: [Task] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
+        tasks.append(Task("test 1", false))
+        tasks.append(Task("test 2", false))
+        tasks.append(Task("test 3", false))
 
         self.tableView.register(UINib(nibName: "TaskTableViewCell", bundle: nil), forCellReuseIdentifier: "TaskCell")
     }
     
     //MARK: Button actions
     @IBAction func addNewTask(_ sender: UIBarButtonItem) {
-        
+        let task = Task("", true);
+        tasks.append(task)
+        tableView.reloadData()
     }
     
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 2
+        return tasks.count
     }
 
 
@@ -42,10 +46,14 @@ class TasksTableViewController: UITableViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath) as? TaskTableViewCell else {
             return UITableViewCell()
         }
-        cell.taskEditable = false
-        cell.taskLabel.text = "Тест"
-        cell.taskCount.text = "Кол-во"
-
+        
+        cell.configure(tasks[indexPath.row], indexPath.row)
+        
+        cell.closure = {[weak self] t, index in
+            self?.tasks[index].taskEditable = t.taskEditable
+            self?.tableView.reloadData()
+        }
+        
         return cell
     }
 

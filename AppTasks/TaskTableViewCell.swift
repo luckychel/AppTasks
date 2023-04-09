@@ -7,10 +7,13 @@
 
 import UIKit
 
+
 class TaskTableViewCell: UITableViewCell {
 
     //MARK: Properies
     var taskEditable: Bool = false
+    var task: Task!
+    var index: Int!
     
     //MARK: IBOutlets
     @IBOutlet weak var taskLabel: UILabel!
@@ -20,31 +23,49 @@ class TaskTableViewCell: UITableViewCell {
     @IBOutlet weak var taskEdit: UITextField!
     
     @IBOutlet weak var taskBtnSave: UIButton!
+    
+    var closure: ((Task, Int) -> ())?
+    
     //MARK: Button action
     @IBAction func taskSave(_ sender: UIButton) {
+        task.text = taskEdit.text ?? ""
+        task.taskEditable = false
+        closure?(task, index)
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        if (taskEditable) {
-            taskLabel.isHidden = true
-            taskCount.isHidden = true
-            taskEdit.isHidden = false
-            taskBtnSave.isHidden = false
+    }
+    
+    func configure(_ task: Task, _ index: Int) {
+        self.task = task
+        self.index = index
+        
+        self.taskEditable = task.taskEditable
+        self.taskLabel.text = task.text
+        self.taskCount.text = String(task.taskCount())
+        
+        self.setDisplay(task)
+    }
+    
+    func setDisplay(_ task: Task){
+        if (task.taskEditable) {
+            self.taskLabel.isHidden = true
+            self.taskCount.isHidden = true
+            self.taskEdit.isHidden = false
+            self.taskBtnSave.isHidden = false
         }
         else
         {
-            taskLabel.isHidden = false
-            taskCount.isHidden = false
-            taskEdit.isHidden = true
-            taskBtnSave.isHidden = true
+            self.taskLabel.isHidden = false
+            self.taskCount.isHidden = false
+            self.taskEdit.isHidden = true
+            self.taskBtnSave.isHidden = true
         }
     }
-    
 }
